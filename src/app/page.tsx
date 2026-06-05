@@ -23,6 +23,11 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CALENDLY_URL } from "@/lib/constants";
 
+const LOGO_URL =
+  "https://github.com/user-attachments/assets/1db20d6f-ccd6-458d-9fc0-295ea27095a3";
+const BROCHURE_URL =
+  "https://github.com/user-attachments/assets/998a387a-c0f5-4c2a-acbe-20ecfdb1ba14";
+
 const trustItems = [
   {
     title: "Local Expertise",
@@ -148,10 +153,12 @@ export default function Home() {
           <div className="container flex items-center justify-between gap-6 py-4">
             <a href="#top" className="flex items-center gap-3">
               <Image
-                src="/images/seeto-realty-logo.svg"
-                alt="Seeto Realty Property Management"
-                width={220}
-                height={52}
+                src={LOGO_URL}
+                alt="Seeto Realty logo"
+                width={240}
+                height={72}
+                unoptimized
+                className="h-10 w-auto sm:h-12"
                 priority
               />
             </a>
@@ -415,6 +422,26 @@ export default function Home() {
                   height={720}
                   className="w-full rounded-3xl border border-neutral-200 object-cover shadow-luxe"
                 />
+                <div className="mt-6 flex items-center gap-4 rounded-2xl border border-neutral-200 bg-white/95 p-4 shadow-card lg:absolute lg:-bottom-8 lg:left-6 lg:mt-0 lg:w-72">
+                  <div className="relative h-20 w-14 overflow-hidden rounded-lg border border-neutral-200 bg-white">
+                    <Image
+                      src={BROCHURE_URL}
+                      alt="Seeto Realty referral brochure"
+                      width={140}
+                      height={200}
+                      unoptimized
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
+                      Referral brochure
+                    </p>
+                    <p className="text-sm font-semibold text-ink">
+                      Inspired by Seeto&apos;s premium partner guide.
+                    </p>
+                  </div>
+                </div>
               </FadeIn>
             </div>
           </section>
