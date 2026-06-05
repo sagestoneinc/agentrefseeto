@@ -21,13 +21,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { REFERRAL_EMAIL, REFERRAL_SOURCE } from "@/lib/constants";
 
 const optionalString = z.union([z.string().min(1), z.literal("")]);
+const optionalEmail = z
+  .string()
+  .email("Enter a valid owner email.")
+  .optional()
+  .or(z.literal(""));
 
 const referralSchema = z.object({
   agentName: z.string().min(2, "Enter the agent name."),
   agentEmail: z.string().email("Enter a valid agent email."),
   agentPhone: optionalString.optional(),
   ownerName: z.string().min(2, "Enter the owner name."),
-  ownerEmail: z.union([z.string().email("Enter a valid owner email."), z.literal("")]),
+  ownerEmail: optionalEmail,
   ownerPhone: z.string().min(7, "Enter a valid owner phone number."),
   propertyAddress: optionalString.optional(),
   propertyType: z.string().min(1, "Select a property type."),
@@ -53,9 +58,21 @@ const propertyTypes = [
 const emailSubject = "New agent referral for Seeto Realty";
 
 function buildMailto(email: string, payload: ReferralValues) {
+  const fieldLabels: Record<keyof ReferralValues, string> = {
+    agentName: "Agent Name",
+    agentEmail: "Agent Email",
+    agentPhone: "Agent Phone",
+    ownerName: "Owner Name",
+    ownerEmail: "Owner Email",
+    ownerPhone: "Owner Phone",
+    propertyAddress: "Property Address",
+    propertyType: "Property Type",
+    notes: "Referral Notes",
+    consent: "Consent",
+  };
   const body = Object.entries(payload)
     .filter(([key]) => key !== "consent")
-    .map(([key, value]) => `${key}: ${value}`)
+    .map(([key, value]) => `${fieldLabels[key as keyof ReferralValues]}: ${value}`)
     .join("\n");
 
   const params = new URLSearchParams({
