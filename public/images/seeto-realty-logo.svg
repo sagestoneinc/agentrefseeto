@@ -1,0 +1,7 @@
+<svg width="260" height="60" viewBox="0 0 260 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="60" height="60" rx="16" fill="#A00000" />
+  <path d="M18 36L30 22L42 36" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M24 36V46H36V36" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="78" y="30" font-family="Playfair Display, serif" font-size="24" font-weight="700" fill="#111111">Seeto Realty</text>
+  <text x="78" y="50" font-family="Inter, sans-serif" font-size="12" font-weight="600" fill="#7A0000" letter-spacing="1.4">PROPERTY MANAGEMENT</text>
+</svg>
