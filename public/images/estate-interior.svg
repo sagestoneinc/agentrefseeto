@@ -1,14 +1,19 @@
 <svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="interior" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#FFFFFF" />
-      <stop offset="100%" stop-color="#F4F1F1" />
+      <stop offset="0%" stop-color="#FFFDF8" />
+      <stop offset="100%" stop-color="#F7F2E9" />
     </linearGradient>
   </defs>
   <rect width="1200" height="900" fill="url(#interior)" />
-  <rect x="80" y="120" width="1040" height="540" rx="32" fill="#111111" opacity="0.9" />
-  <rect x="140" y="180" width="380" height="260" rx="20" fill="#F7F7F7" />
-  <rect x="580" y="180" width="480" height="260" rx="20" fill="#A00000" opacity="0.85" />
-  <rect x="140" y="470" width="920" height="150" rx="24" fill="#FFFFFF" />
-  <path d="M120 690H1080" stroke="#A00000" stroke-width="14" />
+  <rect x="90" y="120" width="1020" height="620" rx="36" fill="#17344B" opacity="0.96" />
+  <rect x="150" y="180" width="340" height="220" rx="24" fill="#FFF9F2" />
+  <rect x="540" y="180" width="460" height="220" rx="24" fill="#E8DCCA" />
+  <rect x="150" y="430" width="850" height="160" rx="26" fill="#FFFFFF" opacity="0.92" />
+  <rect x="182" y="460" width="170" height="100" rx="18" fill="#A46A43" opacity="0.9" />
+  <rect x="382" y="460" width="170" height="100" rx="18" fill="#F0E4D4" />
+  <rect x="582" y="460" width="170" height="100" rx="18" fill="#A46A43" opacity="0.75" />
+  <rect x="782" y="460" width="170" height="100" rx="18" fill="#F0E4D4" />
+  <path d="M120 780H1080" stroke="#A46A43" stroke-width="14" stroke-linecap="round" />
+  <circle cx="970" cy="250" r="52" fill="#E5B06E" opacity="0.72" />
 </svg>

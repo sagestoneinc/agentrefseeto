@@ -5,23 +5,25 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://seetorealty.com"),
   title: {
-    default: "Agent Referral Program | Seeto Realty",
+    default: "Seeto Realty | Plano & Houston Real Estate",
     template: "%s | Seeto Realty",
   },
   description:
-    "Earn referral income without losing your clients. Partner with Seeto Realty Property Management to refer owners and keep your relationship.",
+    "Seeto Realty is a boutique Texas real estate company serving Plano, Houston, DFW, and Greater Houston buyers, sellers, investors, foreclosure clients, and property owners.",
   keywords: [
     "Seeto Realty",
-    "agent referral program",
+    "Plano real estate",
+    "Houston real estate",
+    "DFW homes",
     "property management",
-    "real estate partners",
-    "referral rewards",
-    "Texas property management",
+    "Texas real estate",
+    "foreclosures",
+    "real estate investors",
   ],
   openGraph: {
-    title: "Agent Referral Program | Seeto Realty",
+    title: "Seeto Realty | Plano & Houston Real Estate",
     description:
-      "Partner with Seeto Realty Property Management and earn referral rewards while maintaining your client relationships.",
+      "Boutique Texas real estate guidance for buyers, sellers, investors, foreclosures, and property management clients.",
     type: "website",
     url: "/",
     images: [
@@ -29,15 +31,15 @@ export const metadata: Metadata = {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "Seeto Realty Agent Referral Program",
+        alt: "Seeto Realty homepage",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agent Referral Program | Seeto Realty",
+    title: "Seeto Realty | Plano & Houston Real Estate",
     description:
-      "Refer property owners to Seeto Realty Property Management and earn rewards while keeping the relationship.",
+      "A boutique Texas real estate firm serving Plano, Houston, DFW, and Greater Houston.",
     images: ["/og-image.svg"],
   },
   icons: {
@@ -51,17 +53,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className="h-full antialiased"
-    >
+    <html lang="en" className="h-full antialiased">
       <head>
         <link
           rel="stylesheet"
           href="https://assets.calendly.com/assets/external/widget.css"
         />
       </head>
-      <body className="min-h-full bg-white text-ink">
+      <body className="min-h-full bg-shell text-ink">
         {children}
         <Script
           src="https://assets.calendly.com/assets/external/widget.js"

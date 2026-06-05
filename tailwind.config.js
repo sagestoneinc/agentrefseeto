@@ -15,19 +15,21 @@ module.exports = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         brand: {
-          DEFAULT: "#A00000",
-          dark: "#7A0000",
+          DEFAULT: "#15324A",
+          dark: "#0D2233",
         },
+        shell: "#F7F2E9",
+        copper: "#A46A43",
         ink: "#111111",
-        soft: "#F7F7F7",
+        soft: "#F4EEE5",
         border: "hsl(var(--border))",
         muted: "hsl(var(--muted))",
         "muted-foreground": "hsl(var(--muted-foreground))",
         accent: "hsl(var(--accent))",
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Playfair Display", "serif"],
+        sans: ["Manrope", "system-ui", "sans-serif"],
+        display: ["Fraunces", "serif"],
       },
       boxShadow: {
         luxe: "0 32px 80px rgba(17, 17, 17, 0.14)",
@@ -39,9 +41,9 @@ module.exports = {
       },
       backgroundImage: {
         "hero-glow":
-          "radial-gradient(circle at top right, rgba(160, 0, 0, 0.18), transparent 55%)",
+          "radial-gradient(circle at top right, rgba(21, 50, 74, 0.18), transparent 55%)",
         "diagonal-accent":
-          "linear-gradient(135deg, rgba(160,0,0,0.9), rgba(122,0,0,0.95))",
+          "linear-gradient(135deg, rgba(21,50,74,0.96), rgba(164,106,67,0.9))",
       },
     },
   },

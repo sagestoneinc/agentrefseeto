@@ -1,22 +1,29 @@
 <svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#F7F7F7" />
-      <stop offset="100%" stop-color="#FFFFFF" />
+      <stop offset="0%" stop-color="#F7F2E9" />
+      <stop offset="100%" stop-color="#FFFDF8" />
     </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#A00000" />
-      <stop offset="100%" stop-color="#7A0000" />
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#17344B" />
+      <stop offset="100%" stop-color="#A46A43" />
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E8D9C8" />
+      <stop offset="100%" stop-color="#FFF8F0" />
     </linearGradient>
   </defs>
   <rect width="1600" height="1000" fill="url(#bg)" />
-  <polygon points="0,740 520,480 1100,720 1600,520 1600,1000 0,1000" fill="#ECECEC" />
-  <polygon points="90,680 520,420 1110,680 980,760 520,520 210,700" fill="#FFFFFF" />
-  <polygon points="520,330 1020,600 1020,840 520,580 320,720 320,470" fill="#111111" opacity="0.85" />
-  <rect x="380" y="560" width="180" height="220" rx="16" fill="#F7F7F7" stroke="#DDDDDD" />
-  <rect x="620" y="520" width="180" height="260" rx="16" fill="#A00000" opacity="0.9" />
-  <rect x="860" y="560" width="180" height="220" rx="16" fill="#F7F7F7" stroke="#DDDDDD" />
-  <path d="M0 820H1600" stroke="url(#accent)" stroke-width="18" />
-  <circle cx="1320" cy="240" r="140" fill="#F1E6E6" />
-  <circle cx="1320" cy="240" r="60" fill="url(#accent)" opacity="0.6" />
+  <rect x="0" y="0" width="1600" height="380" fill="url(#sky)" opacity="0.95" />
+  <circle cx="1280" cy="190" r="96" fill="#E5B06E" opacity="0.9" />
+  <path d="M0 720L280 600L520 676L800 566L1130 706L1600 560V1000H0V720Z" fill="#E8DCCA" />
+  <path d="M180 760L520 500L840 700L1080 560L1400 760V1000H180V760Z" fill="#FFF9F2" />
+  <path d="M560 705L825 450L1100 705V1000H560V705Z" fill="#17344B" opacity="0.95" />
+  <rect x="640" y="650" width="110" height="140" rx="10" fill="#FFF9F2" />
+  <rect x="790" y="610" width="110" height="180" rx="10" fill="#A46A43" />
+  <rect x="940" y="650" width="110" height="140" rx="10" fill="#FFF9F2" />
+  <rect x="640" y="500" width="410" height="56" rx="28" fill="url(#glass)" opacity="0.92" />
+  <path d="M120 878H1480" stroke="#A46A43" stroke-width="18" stroke-linecap="round" />
+  <path d="M230 836C270 774 320 744 374 744C436 744 488 786 514 836" stroke="#17344B" stroke-width="10" stroke-linecap="round" />
+  <path d="M1084 836C1124 774 1174 744 1228 744C1290 744 1342 786 1368 836" stroke="#17344B" stroke-width="10" stroke-linecap="round" />
 </svg>

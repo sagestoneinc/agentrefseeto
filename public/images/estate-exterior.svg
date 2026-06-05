@@ -1,15 +1,20 @@
 <svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="exterior" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#F7F7F7" />
-      <stop offset="100%" stop-color="#FFFFFF" />
+      <stop offset="0%" stop-color="#F7F2E9" />
+      <stop offset="100%" stop-color="#FFFDF8" />
     </linearGradient>
   </defs>
   <rect width="1200" height="900" fill="url(#exterior)" />
-  <polygon points="80,620 500,320 1120,620 1120,820 80,820" fill="#111111" opacity="0.9" />
-  <polygon points="160,610 500,380 1040,610 980,650 500,430 220,650" fill="#FFFFFF" />
-  <rect x="240" y="620" width="220" height="160" rx="18" fill="#F7F7F7" stroke="#DDDDDD" />
-  <rect x="520" y="580" width="200" height="200" rx="18" fill="#A00000" opacity="0.85" />
-  <rect x="760" y="620" width="220" height="160" rx="18" fill="#F7F7F7" stroke="#DDDDDD" />
-  <path d="M60 750H1140" stroke="#7A0000" stroke-width="12" />
+  <rect x="0" y="0" width="1200" height="260" fill="#17344B" opacity="0.92" />
+  <circle cx="970" cy="120" r="62" fill="#E5B06E" opacity="0.95" />
+  <path d="M110 640L360 470L540 590L720 430L940 610L1100 540V900H110V640Z" fill="#E8DCCA" />
+  <path d="M170 680L420 500L650 650L860 510L1030 680V900H170V680Z" fill="#FFF9F2" />
+  <path d="M420 670L600 510L790 670V900H420V670Z" fill="#17344B" opacity="0.95" />
+  <rect x="474" y="634" width="68" height="106" rx="8" fill="#FFF9F2" />
+  <rect x="620" y="604" width="68" height="136" rx="8" fill="#A46A43" />
+  <rect x="766" y="634" width="68" height="106" rx="8" fill="#FFF9F2" />
+  <path d="M70 784H1130" stroke="#A46A43" stroke-width="16" stroke-linecap="round" />
+  <path d="M210 780C236 736 276 708 320 708C366 708 406 734 434 780" stroke="#17344B" stroke-width="9" stroke-linecap="round" />
+  <path d="M872 780C898 736 938 708 982 708C1028 708 1068 734 1096 780" stroke="#17344B" stroke-width="9" stroke-linecap="round" />
 </svg>

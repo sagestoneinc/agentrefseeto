@@ -14,18 +14,18 @@ export function StickyMobileCta() {
           asChild
           className="flex-1"
           size="sm"
-          aria-label="Submit a referral"
+          aria-label="Request a consultation"
         >
-          <a href="#referral-form">Submit a Referral</a>
+          <a href="#contact">Consult</a>
         </Button>
         <CalendlyPopupButton
           calendlyUrl={CALENDLY_URL}
           variant="outline"
           size="sm"
           className="flex-1"
-          aria-label="Schedule partnership call"
+          aria-label="Schedule consultation"
         >
-          Schedule Call
+          Book
           <ArrowUpRight className="h-4 w-4" />
         </CalendlyPopupButton>
       </div>

@@ -21,58 +21,65 @@ import { Textarea } from "@/components/ui/textarea";
 import { REFERRAL_EMAIL, REFERRAL_SOURCE } from "@/lib/constants";
 
 const optionalString = z.union([z.string().min(1), z.literal("")]);
-const optionalEmail = z
-  .string()
-  .email("Enter a valid owner email.")
-  .optional()
-  .or(z.literal(""));
 
-const referralSchema = z.object({
-  agentName: z.string().min(2, "Enter the agent name."),
-  agentEmail: z.string().email("Enter a valid agent email."),
-  agentPhone: optionalString.optional(),
-  ownerName: z.string().min(2, "Enter the owner name."),
-  ownerEmail: optionalEmail,
-  ownerPhone: z.string().min(7, "Enter a valid owner phone number."),
-  propertyAddress: optionalString.optional(),
-  propertyType: z.string().min(1, "Select a property type."),
-  notes: optionalString.optional(),
-  consent: z
-    .boolean()
-    .refine((value) => value === true, {
-      message: "Consent is required to submit a referral.",
-    }),
+const leadSchema = z.object({
+  fullName: z.string().min(2, "Enter your name."),
+  email: z.string().email("Enter a valid email address."),
+  phone: optionalString.optional(),
+  clientType: z.string().min(1, "Select what you need help with."),
+  marketArea: z.string().min(1, "Select a market area."),
+  timeline: z.string().min(1, "Select a timeline."),
+  details: optionalString.optional(),
+  consent: z.boolean().refine((value) => value === true, {
+    message: "Consent is required to submit the form.",
+  }),
 });
 
-type ReferralValues = z.infer<typeof referralSchema>;
+type LeadValues = z.infer<typeof leadSchema>;
 
-const propertyTypes = [
-  "Single-family home",
-  "Duplex / fourplex",
-  "Small multifamily",
-  "Condo / townhome",
-  "Investor portfolio",
-  "Luxury rental",
+const clientTypes = [
+  "Buying a home",
+  "Selling a home",
+  "Investing",
+  "Foreclosure support",
+  "Property management",
+  "Other",
 ];
 
-const emailSubject = "New agent referral for Seeto Realty";
+const marketAreas = [
+  "Plano / Collin County",
+  "Dallas-Fort Worth",
+  "Houston / Greater Houston",
+  "Texas investor markets",
+  "Not sure yet",
+];
 
-function buildMailto(email: string, payload: ReferralValues) {
-  const fieldLabels: Record<keyof ReferralValues, string> = {
-    agentName: "Agent Name",
-    agentEmail: "Agent Email",
-    agentPhone: "Agent Phone",
-    ownerName: "Owner Name",
-    ownerEmail: "Owner Email",
-    ownerPhone: "Owner Phone",
-    propertyAddress: "Property Address",
-    propertyType: "Property Type",
-    notes: "Referral Notes",
+const timelines = [
+  "Ready now",
+  "Within 30 days",
+  "1 to 3 months",
+  "Just researching",
+];
+
+const emailSubject = "New Seeto Realty website inquiry";
+
+function buildMailto(email: string, payload: LeadValues) {
+  const fieldLabels: Record<keyof LeadValues, string> = {
+    fullName: "Full Name",
+    email: "Email",
+    phone: "Phone",
+    clientType: "Help Needed With",
+    marketArea: "Market Area",
+    timeline: "Timeline",
+    details: "Details",
     consent: "Consent",
   };
+
   const body = Object.entries(payload)
     .filter(([key]) => key !== "consent")
-    .map(([key, value]) => `${fieldLabels[key as keyof ReferralValues]}: ${value}`)
+    .map(
+      ([key, value]) => `${fieldLabels[key as keyof LeadValues]}: ${value}`
+    )
     .join("\n");
 
   const params = new URLSearchParams({
@@ -89,18 +96,16 @@ export function ReferralForm() {
     message: string;
   }>({ type: "idle", message: "" });
 
-  const form = useForm<ReferralValues>({
-    resolver: zodResolver(referralSchema),
+  const form = useForm<LeadValues>({
+    resolver: zodResolver(leadSchema),
     defaultValues: {
-      agentName: "",
-      agentEmail: "",
-      agentPhone: "",
-      ownerName: "",
-      ownerEmail: "",
-      ownerPhone: "",
-      propertyAddress: "",
-      propertyType: "",
-      notes: "",
+      fullName: "",
+      email: "",
+      phone: "",
+      clientType: "",
+      marketArea: "",
+      timeline: "",
+      details: "",
       consent: false,
     },
   });
@@ -109,7 +114,7 @@ export function ReferralForm() {
   const notificationEmail =
     process.env.NEXT_PUBLIC_REFERRAL_EMAIL ?? REFERRAL_EMAIL;
 
-  const onSubmit = async (values: ReferralValues) => {
+  const onSubmit = async (values: LeadValues) => {
     setStatus({ type: "idle", message: "" });
 
     const payload = {
@@ -123,8 +128,7 @@ export function ReferralForm() {
         window.location.href = buildMailto(notificationEmail, values);
         setStatus({
           type: "error",
-          message:
-            "We opened your email client to send the referral while our secure form endpoint is configured.",
+          message: "We opened your email client so your inquiry can be sent right away.",
         });
         return;
       }
@@ -143,7 +147,7 @@ export function ReferralForm() {
       setStatus({
         type: "success",
         message:
-          "Thank you. Your referral was delivered to Seeto Realty and a team member will follow up within one business day.",
+          "Thank you. Seeto Realty received your inquiry and will follow up within one business day.",
       });
     } catch {
       window.location.href = buildMailto(notificationEmail, values);
@@ -159,77 +163,43 @@ export function ReferralForm() {
     <form
       className="grid gap-6"
       onSubmit={form.handleSubmit(onSubmit)}
-      aria-describedby="referral-status"
+      aria-describedby="lead-status"
     >
       <div className="grid gap-4 md:grid-cols-2">
         <div className="grid gap-2">
-          <Label htmlFor="agentName">Agent name</Label>
-          <Input id="agentName" {...form.register("agentName")} />
-          {form.formState.errors.agentName && (
+          <Label htmlFor="fullName">Full name</Label>
+          <Input id="fullName" {...form.register("fullName")} />
+          {form.formState.errors.fullName && (
             <p className="text-xs text-brand">
-              {form.formState.errors.agentName.message}
+              {form.formState.errors.fullName.message}
             </p>
           )}
         </div>
         <div className="grid gap-2">
-          <Label htmlFor="agentEmail">Agent email</Label>
-          <Input id="agentEmail" type="email" {...form.register("agentEmail")} />
-          {form.formState.errors.agentEmail && (
+          <Label htmlFor="email">Email</Label>
+          <Input id="email" type="email" {...form.register("email")} />
+          {form.formState.errors.email && (
             <p className="text-xs text-brand">
-              {form.formState.errors.agentEmail.message}
+              {form.formState.errors.email.message}
             </p>
           )}
         </div>
         <div className="grid gap-2">
-          <Label htmlFor="agentPhone">Agent phone</Label>
-          <Input id="agentPhone" type="tel" {...form.register("agentPhone")} />
+          <Label htmlFor="phone">Phone</Label>
+          <Input id="phone" type="tel" {...form.register("phone")} />
         </div>
         <div className="grid gap-2">
-          <Label htmlFor="ownerName">Owner name</Label>
-          <Input id="ownerName" {...form.register("ownerName")} />
-          {form.formState.errors.ownerName && (
-            <p className="text-xs text-brand">
-              {form.formState.errors.ownerName.message}
-            </p>
-          )}
-        </div>
-        <div className="grid gap-2">
-          <Label htmlFor="ownerEmail">Owner email</Label>
-          <Input id="ownerEmail" type="email" {...form.register("ownerEmail")} />
-          {form.formState.errors.ownerEmail && (
-            <p className="text-xs text-brand">
-              {form.formState.errors.ownerEmail.message}
-            </p>
-          )}
-        </div>
-        <div className="grid gap-2">
-          <Label htmlFor="ownerPhone">Owner phone</Label>
-          <Input id="ownerPhone" type="tel" {...form.register("ownerPhone")} />
-          {form.formState.errors.ownerPhone && (
-            <p className="text-xs text-brand">
-              {form.formState.errors.ownerPhone.message}
-            </p>
-          )}
-        </div>
-        <div className="grid gap-2 md:col-span-2">
-          <Label htmlFor="propertyAddress">Property address</Label>
-          <Input
-            id="propertyAddress"
-            {...form.register("propertyAddress")}
-          />
-        </div>
-        <div className="grid gap-2 md:col-span-2">
-          <Label>Property type</Label>
+          <Label>Help needed with</Label>
           <Controller
             control={form.control}
-            name="propertyType"
+            name="clientType"
             render={({ field }) => (
               <Select value={field.value} onValueChange={field.onChange}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select a property type" />
+                  <SelectValue placeholder="Select one" />
                 </SelectTrigger>
                 <SelectContent>
-                  {propertyTypes.map((type) => (
+                  {clientTypes.map((type) => (
                     <SelectItem key={type} value={type}>
                       {type}
                     </SelectItem>
@@ -238,19 +208,71 @@ export function ReferralForm() {
               </Select>
             )}
           />
-          {form.formState.errors.propertyType && (
+          {form.formState.errors.clientType && (
             <p className="text-xs text-brand">
-              {form.formState.errors.propertyType.message}
+              {form.formState.errors.clientType.message}
+            </p>
+          )}
+        </div>
+        <div className="grid gap-2">
+          <Label>Market area</Label>
+          <Controller
+            control={form.control}
+            name="marketArea"
+            render={({ field }) => (
+              <Select value={field.value} onValueChange={field.onChange}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a market" />
+                </SelectTrigger>
+                <SelectContent>
+                  {marketAreas.map((area) => (
+                    <SelectItem key={area} value={area}>
+                      {area}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
+          {form.formState.errors.marketArea && (
+            <p className="text-xs text-brand">
+              {form.formState.errors.marketArea.message}
+            </p>
+          )}
+        </div>
+        <div className="grid gap-2">
+          <Label>Timeline</Label>
+          <Controller
+            control={form.control}
+            name="timeline"
+            render={({ field }) => (
+              <Select value={field.value} onValueChange={field.onChange}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select timing" />
+                </SelectTrigger>
+                <SelectContent>
+                  {timelines.map((timeline) => (
+                    <SelectItem key={timeline} value={timeline}>
+                      {timeline}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
+          {form.formState.errors.timeline && (
+            <p className="text-xs text-brand">
+              {form.formState.errors.timeline.message}
             </p>
           )}
         </div>
         <div className="grid gap-2 md:col-span-2">
-          <Label htmlFor="notes">Referral notes</Label>
+          <Label htmlFor="details">Project details</Label>
           <Textarea
-            id="notes"
+            id="details"
             rows={4}
-            placeholder="Timeline, property condition, owner goals, and best next step."
-            {...form.register("notes")}
+            placeholder="Tell us about your home search, listing plans, investment goals, or property management needs."
+            {...form.register("details")}
           />
         </div>
       </div>
@@ -263,46 +285,39 @@ export function ReferralForm() {
             <Checkbox
               id="consent"
               checked={field.value}
-              onCheckedChange={(value) => field.onChange(value === true)}
+              onCheckedChange={(checked) => field.onChange(Boolean(checked))}
             />
           )}
         />
-        <div className="grid gap-1">
-          <Label htmlFor="consent">Referral consent</Label>
-          <p className="text-xs text-muted-foreground">
-            I have permission to share this referral with Seeto Realty Property
-            Management.
-          </p>
-          {form.formState.errors.consent && (
-            <p className="text-xs text-brand">
-              {form.formState.errors.consent.message}
-            </p>
-          )}
-        </div>
+        <Label className="text-sm leading-relaxed text-neutral-600">
+          I agree to be contacted by Seeto Realty about this inquiry and
+          understand the submission may be stored in our CRM.
+        </Label>
       </div>
-
-      {status.message && (
-        <div
-          id="referral-status"
-          className={`rounded-xl border px-4 py-3 text-sm font-medium ${
-            status.type === "success"
-              ? "border-emerald-200 bg-emerald-50 text-emerald-800"
-              : "border-rose-200 bg-rose-50 text-rose-800"
-          }`}
-          aria-live="polite"
-        >
-          {status.message}
-        </div>
+      {form.formState.errors.consent && (
+        <p className="-mt-2 text-xs text-brand">
+          {form.formState.errors.consent.message}
+        </p>
       )}
 
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <Button type="submit" size="lg">
-          Submit A Referral
-        </Button>
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+      <div id="lead-status" aria-live="polite" className="min-h-6">
+        {status.message && (
+          <p
+            className={`text-sm ${status.type === "success" ? "text-emerald-600" : "text-brand"}`}
+          >
+            {status.message}
+          </p>
+        )}
+      </div>
+
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <Button type="submit" className="sm:flex-1">
+          Request Consultation
           <Mail className="h-4 w-4" />
-          <span>Prefer email? We can route your referral manually.</span>
-        </div>
+        </Button>
+        <Button asChild variant="outline" className="sm:flex-1">
+          <a href={`mailto:${notificationEmail}`}>Prefer email? Send details</a>
+        </Button>
       </div>
     </form>
   );
