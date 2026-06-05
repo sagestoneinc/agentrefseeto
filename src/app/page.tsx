@@ -157,7 +157,6 @@ export default function Home() {
                 alt="Seeto Realty logo"
                 width={240}
                 height={72}
-                unoptimized
                 className="h-10 w-auto sm:h-12"
                 priority
               />
@@ -429,7 +428,6 @@ export default function Home() {
                       alt="Seeto Realty referral brochure"
                       width={140}
                       height={200}
-                      unoptimized
                       className="h-full w-full object-cover"
                     />
                   </div>
