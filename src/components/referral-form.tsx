@@ -32,9 +32,11 @@ const referralSchema = z.object({
   propertyAddress: optionalString.optional(),
   propertyType: z.string().min(1, "Select a property type."),
   notes: optionalString.optional(),
-  consent: z.literal(true, {
-    errorMap: () => ({ message: "Consent is required to submit a referral." }),
-  }),
+  consent: z
+    .boolean()
+    .refine((value) => value === true, {
+      message: "Consent is required to submit a referral.",
+    }),
 });
 
 type ReferralValues = z.infer<typeof referralSchema>;
@@ -126,7 +128,7 @@ export function ReferralForm() {
         message:
           "Thank you. Your referral was delivered to Seeto Realty and a team member will follow up within one business day.",
       });
-    } catch (error) {
+    } catch {
       window.location.href = buildMailto(notificationEmail, values);
       setStatus({
         type: "error",

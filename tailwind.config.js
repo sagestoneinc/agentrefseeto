@@ -1,7 +1,5 @@
-import type { Config } from "tailwindcss";
-import animate from "tailwindcss-animate";
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   darkMode: ["class"],
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
@@ -28,8 +26,8 @@ const config: Config = {
         accent: "hsl(var(--accent))",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
-        display: ["var(--font-playfair)", "Playfair Display", "serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+        display: ["Playfair Display", "serif"],
       },
       boxShadow: {
         luxe: "0 32px 80px rgba(17, 17, 17, 0.14)",
@@ -47,7 +45,5 @@ const config: Config = {
       },
     },
   },
-  plugins: [animate],
+  plugins: [require("tailwindcss-animate")],
 };
-
-export default config;
