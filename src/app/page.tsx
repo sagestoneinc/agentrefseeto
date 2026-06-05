@@ -436,7 +436,7 @@ export default function Home() {
                       Referral brochure
                     </p>
                     <p className="text-sm font-semibold text-ink">
-                      Inspired by Seeto&apos;s premium partner guide.
+                      Inspired by Seeto’s premium partner guide.
                     </p>
                   </div>
                 </div>
